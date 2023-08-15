@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public enum SubjectCombination {
+public enum CombinationSubject {
     A(new ArrayList<Subject>(List.of(Subject.MATH, Subject.PHYSIC, Subject.GEOGRAPHY)), 1),
     B(new ArrayList<Subject>(List.of(Subject.MATH, Subject.CHEMISTRY, Subject.BIOLOGY)), 2),
     C(new ArrayList<Subject>(List.of(Subject.LITERATURE, Subject.HISTORY, Subject.GEOGRAPHY)), 3);
-
     private final ArrayList<Subject> subjects;
+
+    public int getValue() {
+        return value;
+    }
+
     private final int value;
 
-    SubjectCombination(ArrayList<Subject> subjects, int value) {
+    CombinationSubject(ArrayList<Subject> subjects, int value) {
         this.subjects = subjects;
         this.value = value;
     }
@@ -27,11 +31,14 @@ public enum SubjectCombination {
         return combinationInformation.toString();
     }
 
-    public ArrayList<Subject> getSubjects() {
-        return subjects;
+    public static Optional<CombinationSubject> getCombinationSubject(int value) {
+        for (CombinationSubject combinationSubject : CombinationSubject.values()) {
+            if (combinationSubject.value == value) return Optional.of(combinationSubject);
+        }
+        return Optional.empty();
     }
 
     public static void main(String[] args) {
-        System.out.println(A.toString());
+        System.out.println(C.toString());
     }
 }

@@ -1,7 +1,5 @@
 package homework3.model;
 
-import homework3.view.CandidateView;
-
 import java.util.*;
 
 public class Candidate {
@@ -9,9 +7,9 @@ public class Candidate {
     private final String fullName;
     private final String address;
     private final int priority;
-    private final ArrayList<SubjectCombination> combinations;
+    private final ArrayList<CombinationSubject> combinations;
 
-    public Candidate(int id, String fullName, String address, int priority, ArrayList<SubjectCombination> combinations) {
+    public Candidate(int id, String fullName, String address, int priority, ArrayList<CombinationSubject> combinations) {
         this.id = id;
         this.fullName = fullName;
         this.address = address;
@@ -29,19 +27,13 @@ public class Candidate {
                 ", combinations=" + combinations.toString() +
                 '}';
     }
-
-    public Optional<Set<Subject>> getSubject() {
-        Optional<Set<Subject>> subjects = Optional.of(new HashSet<>());
-        for (SubjectCombination subjectCombination : combinations) {
-            for (Subject subject : subjectCombination.getSubjects()) {
-                subjects.get().add(subject);
-            }
-        }
-        return subjects;
+    @Override
+    public int hashCode() {
+        return id;
     }
 
     public static void main(String[] args) {
-        Candidate candidate = new Candidate(1, "phucnq", "tuyen quang", 1, new ArrayList<SubjectCombination>(List.of(SubjectCombination.A, SubjectCombination.B)));
+        Candidate candidate = new Candidate(1, "phucnq", "tuyen quang", 1, new ArrayList<CombinationSubject>(List.of(CombinationSubject.A, CombinationSubject.B)));
         System.out.println(candidate.toString());
     }
 }

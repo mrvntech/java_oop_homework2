@@ -1,10 +1,5 @@
 package homework3.view;
 
-import homework3.model.Subject;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class CandidateView extends InputView {
     public CandidateView() {
         super();
@@ -12,17 +7,18 @@ public class CandidateView extends InputView {
 
     public int getId() {
         System.out.print("Enter id: ");
-        System.out.print("Enter id: ");
         int id = scanner.nextInt();
         scanner.nextLine();
         return id;
     }
 
     public String getFullName() {
+        System.out.print("Enter full name: ");
         return scanner.nextLine();
     }
 
     public String getAddress() {
+        System.out.print("Enter address: ");
         return scanner.nextLine();
     }
 
@@ -31,23 +27,5 @@ public class CandidateView extends InputView {
         int priority = scanner.nextInt();
         scanner.nextLine();
         return priority;
-    }
-
-    public ArrayList<Integer> getSubject() {
-        boolean isEnterSubject = true;
-        SubjectView subjectView = new SubjectView();
-        ArrayList<Integer> subjectInputs = new ArrayList<>();
-        while (isEnterSubject) {
-            isEnterSubject = false;
-            int subjectInput = subjectView.getSubjectInput(scanner);
-            for (Subject subject : Subject.values()) {
-                if (subjectInput == subject.getValue()) {
-                    isEnterSubject = true;
-                    subjectInputs.add(subjectInput);
-                    break;
-                }
-            }
-        }
-        return subjectInputs;
     }
 };
