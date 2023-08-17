@@ -1,4 +1,4 @@
-package homework3;
+package homework3.model.action;
 
 import java.util.Optional;
 

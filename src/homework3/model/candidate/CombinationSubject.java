@@ -1,4 +1,4 @@
-package homework3.model;
+package homework3.model.candidate;
 
 import java.util.ArrayList;
 import java.util.List;
