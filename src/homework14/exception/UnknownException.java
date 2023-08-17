@@ -1,4 +1,4 @@
-package homework14.model;
+package homework14.exception;
 
 public class UnknownException extends Exception {
     public UnknownException() {

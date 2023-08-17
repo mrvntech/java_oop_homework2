@@ -1,4 +1,4 @@
-package homework14.model;
+package homework14.exception;
 
 public class InvalidPhoneNumberException extends RuntimeException {
     public InvalidPhoneNumberException() {

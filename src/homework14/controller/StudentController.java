@@ -1,13 +1,12 @@
 package homework14.controller;
 
-import homework14.model.GoodStudent;
-import homework14.model.NormalStudent;
-import homework14.model.Student;
+import homework14.model.student.GoodStudent;
+import homework14.model.student.NormalStudent;
+import homework14.model.student.Student;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class StudentController {
     private final Comparator<Student> comparator = new Comparator<Student>() {

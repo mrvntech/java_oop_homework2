@@ -56,7 +56,6 @@ public class EmployeeController {
                 default -> {
                     isProgramRunning = false;
                 }
-
             }
         }
     }

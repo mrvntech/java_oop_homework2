@@ -1,8 +1,8 @@
-package homework14.model;
+package homework14.model.student;
 
 public class GoodStudent extends Student {
-    private Double gpa;
-    private String bestRewardName;
+    private final Double gpa;
+    private final String bestRewardName;
 
     public GoodStudent(String fullName, String dateOfBirth, boolean sex, String phoneNumber, String universityName, int gradeLevel, Double gpa, String bestRewardName) {
         super(fullName, dateOfBirth, sex, phoneNumber, universityName, gradeLevel);

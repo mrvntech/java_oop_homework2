@@ -1,4 +1,4 @@
-package homework14.model;
+package homework14.model.student;
 
 public class NormalStudent extends Student {
     private Double englishScore;
