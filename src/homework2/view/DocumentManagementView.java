@@ -1,10 +1,7 @@
 package homework2.view;
 
-import homework2.controller.DocumentManagement;
-import homework2.model.*;
 import homework2.model.action.Action;
-import homework2.model.document.Document;
-import homework2.model.document.DocumentType;
+import homework2.model.document.*;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -32,7 +29,7 @@ public class DocumentManagementView {
         return documentType.get();
     }
 
-    public static Action getAction(Scanner scanner) {
+    public static Action getAction() {
         Optional<Action> action = Optional.empty();
         while (true) {
             System.out.println("Please input a number to choose action type,\n" +
@@ -142,8 +139,37 @@ public class DocumentManagementView {
         }
     }
 
-    public static Document getDocument() {
-        return null;
+    public static Optional<Document> getDocument() {
+        DocumentType documentType = getDocumentType();
+        switch (documentType) {
+            case BOOK -> {
+                int id = getId();
+                String publisherName = getPublisherName();
+                int publishNumber = getPublishNumber();
+                String authorName = getAuthorName();
+                int pageNumber = getPageNumber();
+                return Optional.of(new Book(id, publisherName, publishNumber, authorName, pageNumber));
+            }
+            case MAGAZINE -> {
+                int id = getId();
+                String publisherName = getPublisherName();
+                int publishNumber = getPublishNumber();
+                String publishMonth = getPublishMonth();
+                int number = getNumber();
+                return Optional.of(new Magazine(id, publisherName, publishNumber, publishMonth, number));
+            }
+            case REPORT -> {
+                int id = getId();
+                String publisherName = getPublisherName();
+                int publishNumber = getPublishNumber();
+                String publishDate = getPublishDate();
+                return Optional.of(new Report(id, publisherName, publishNumber, publishDate));
+            }
+            default -> {
+                return Optional.empty();
+            }
+        }
+
     }
 
     public static void main(String[] args) {

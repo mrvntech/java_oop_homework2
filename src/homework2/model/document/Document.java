@@ -5,18 +5,14 @@ abstract public class Document {
     protected String publisher;
     protected int publishNumber;
 
+    public int getId() {
+        return id;
+    }
+
     public Document(int id, String publisher, int publishNumber) {
         this.id = id;
         this.publisher = publisher;
         this.publishNumber = publishNumber;
-    }
-
-    public boolean equals(Document document) {
-        return this.id.equals(document.id);
-    }
-
-    public int hashCode() {
-        return id;
     }
 }
 
