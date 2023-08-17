@@ -6,8 +6,12 @@ public enum RoomType {
     A(500, 1),
     B(300, 2),
     C(100, 3);
-    private int cost;
-    private int value;
+    private final int cost;
+    private final int value;
+
+    public int getCost() {
+        return cost;
+    }
 
     RoomType(int cost, int value) {
         this.cost = cost;

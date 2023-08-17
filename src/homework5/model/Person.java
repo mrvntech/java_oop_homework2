@@ -7,17 +7,7 @@ public class Person {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
+    public int getId() {
         return id;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return hashCode() == obj.hashCode();
-    }
-
-    public boolean equals(int id) {
-        return this.id == id;
     }
 }
