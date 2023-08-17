@@ -1,6 +1,7 @@
-package homework2.model;
+package homework2.model.document;
 
-import homework2.model.Document;
+import homework2.model.document.Document;
+import homework2.model.document.DocumentType;
 
 public class Report extends Document {
     protected int date;

@@ -1,7 +1,6 @@
 package homework2;
 
 import homework2.controller.ActionController;
-import homework2.controller.ActionType;
 import homework2.controller.DocumentController;
 
 import java.util.Optional;
@@ -27,7 +26,7 @@ public class Main {
                         sutDownProgram();
                     }
                     case ADD_DOCUMENT -> {
-                        documentController.createDocument(scanner);
+//                        documentController.createDocument(scanner);
                     }
                     case REMOVE_DOCUMENT -> {
                         documentController.removeDocumentById(scanner);

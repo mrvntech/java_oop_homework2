@@ -1,4 +1,7 @@
-package homework2.model;
+package homework2.model.document;
+
+import homework2.model.document.Document;
+import homework2.model.document.DocumentType;
 
 public class Book extends Document {
     protected String authorName;

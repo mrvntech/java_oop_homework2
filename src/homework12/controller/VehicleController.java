@@ -10,7 +10,6 @@ import java.util.Optional;
 public class VehicleController {
     private final HashMap<Integer, Vehicle> vehicles = new HashMap<>();
     private final HashMap<String, ArrayList<Vehicle>> brandVehicles = new HashMap<>();
-
     private final HashMap<String, ArrayList<Vehicle>> colorVehicles = new HashMap<>();
 
     public void createVehicle(Vehicle _vehicle) {

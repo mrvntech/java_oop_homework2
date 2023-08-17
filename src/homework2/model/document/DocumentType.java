@@ -1,4 +1,4 @@
-package homework2.model;
+package homework2.model.document;
 
 
 import java.util.Optional;
@@ -7,7 +7,7 @@ public enum DocumentType {
     BOOK(1),
     MAGAZINE(2),
     REPORT(3);
-    private int value;
+    private final int value;
 
     DocumentType(int value) {
         this.value = value;

@@ -1,11 +1,11 @@
-package homework2.model;
+package homework2.model.document;
 
 abstract public class Document {
-    protected String id;
+    protected int id;
     protected String publisher;
     protected int publishNumber;
 
-    public Document(String id, String publisher, int publishNumber) {
+    public Document(int id, String publisher, int publishNumber) {
         this.id = id;
         this.publisher = publisher;
         this.publishNumber = publishNumber;
@@ -16,8 +16,7 @@ abstract public class Document {
     }
 
     public int hashCode() {
-        return this.id.hashCode();
+        return id;
     }
-    public abstract DocumentType getDocumentType();
 }
 
