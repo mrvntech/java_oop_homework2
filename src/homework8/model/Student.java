@@ -1,4 +1,4 @@
-package homework8;
+package homework8.model;
 
 public class Student {
     private Student fullName;

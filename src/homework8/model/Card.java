@@ -1,4 +1,6 @@
-package homework8;
+package homework8.model;
+
+import homework8.model.Student;
 
 public class Card {
     private int id;
