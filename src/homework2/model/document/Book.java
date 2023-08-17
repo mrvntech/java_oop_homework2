@@ -9,4 +9,15 @@ public class Book extends Document {
         this.authorName = authorName;
         this.pageNumber = pageNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "authorName='" + authorName + '\'' +
+                ", pageNumber=" + pageNumber +
+                ", id=" + id +
+                ", publisher='" + publisher + '\'' +
+                ", publishNumber=" + publishNumber +
+                '}';
+    }
 }

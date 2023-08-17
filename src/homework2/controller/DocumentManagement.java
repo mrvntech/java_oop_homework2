@@ -23,9 +23,8 @@ public class DocumentManagement {
 
     public static void removeDocument() {
         int id = DocumentManagementView.getId();
-        documents.forEach(document -> {
-            if (document.getId() == id) documents.remove(document);
-        });
+        List<Document> searchDocuments = documents.stream().filter(document -> id == document.getId()).toList();
+        documents.remove(searchDocuments.get(0));
     }
 
     public static Optional<Document> getDocument() {
@@ -72,6 +71,7 @@ public class DocumentManagement {
                 }
                 case GET_DOCUMENT_INFORMATION -> {
                     Optional<Document> document = getDocument();
+                    System.out.println(document.toString());
                 }
                 case REMOVE_DOCUMENT -> {
                     removeDocument();
@@ -80,7 +80,10 @@ public class DocumentManagement {
                     addDocument();
                 }
                 case GET_DOCUMENTS_BY_TYPE -> {
-                    Optional<ArrayList<Document>> documentType = getDocumentByType();
+                    Optional<ArrayList<Document>> documents = getDocumentByType();
+                    documents.ifPresent(documentArrayList -> documentArrayList.forEach(document -> {
+                        System.out.println(document.toString());
+                    }));
                 }
             }
         }

@@ -79,9 +79,9 @@ public class DocumentManagementView {
             System.out.print("Enter publish number: ");
             if (scanner.hasNextInt()) {
                 publishNumber = scanner.nextInt();
+                scanner.nextLine();
                 break;
             }
-            scanner.nextLine();
         }
         return publishNumber;
     }
@@ -98,7 +98,7 @@ public class DocumentManagementView {
     public static int getPageNumber() {
         int pageNumber;
         while (true) {
-            System.out.println("Enter page number: ");
+            System.out.print("Enter page number: ");
             if (scanner.hasNextInt()) {
                 pageNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -169,11 +169,5 @@ public class DocumentManagementView {
                 return Optional.empty();
             }
         }
-
-    }
-
-    public static void main(String[] args) {
-//        System.out.println(getPublisherName());
-        System.out.println(getPublishNumber());
     }
 }

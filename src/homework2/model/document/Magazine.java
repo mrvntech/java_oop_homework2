@@ -9,4 +9,15 @@ public class Magazine extends Document {
         this.month = month;
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return "Magazine{" +
+                "month='" + month + '\'' +
+                ", number=" + number +
+                ", id=" + id +
+                ", publisher='" + publisher + '\'' +
+                ", publishNumber=" + publishNumber +
+                '}';
+    }
 }
