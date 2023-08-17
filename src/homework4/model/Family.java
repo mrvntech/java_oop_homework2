@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Family {
     private final ArrayList<Person> persons = new ArrayList<Person>();
-
     private int houseNumber;
 
     public Family(int houseNumber) {
@@ -31,5 +30,13 @@ public class Family {
 
     public ArrayList<Person> getPersons() {
         return persons;
+    }
+
+    @Override
+    public String toString() {
+        return "Family{" +
+                "persons=" + persons.toString() +
+                ", houseNumber=" + houseNumber +
+                '}';
     }
 }

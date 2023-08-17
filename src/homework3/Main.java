@@ -7,7 +7,6 @@ import homework3.view.CandidateView;
 import homework3.view.CombinationSubjectView;
 
 import java.util.Optional;
-import java.util.Scanner;
 
 public class Main {
     public static boolean isProgramRunning = true;

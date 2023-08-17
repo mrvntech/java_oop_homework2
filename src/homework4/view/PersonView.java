@@ -1,30 +1,30 @@
 package homework4.view;
 
-public class PersonView extends InputView {
-    public PersonView() {
-        super();
-    }
+import java.util.Scanner;
 
-    public int getId() {
+public class PersonView {
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static int getId() {
         System.out.print("Enter person id: ");
         int id = scanner.nextInt();
         scanner.nextLine();
         return id;
     }
 
-    public int getAge() {
+    public static int getAge() {
         System.out.print("Enter person age: ");
         int age = scanner.nextInt();
         scanner.nextLine();
         return age;
     }
 
-    public String getFullName() {
+    public static String getFullName() {
         System.out.print("Enter person full name: ");
         return scanner.nextLine();
     }
 
-    public String getJob() {
+    public static String getJob() {
         System.out.print("Enter person job: ");
         return scanner.nextLine();
     }

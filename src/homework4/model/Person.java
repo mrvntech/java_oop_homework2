@@ -23,13 +23,7 @@ public class Person {
                 '}';
     }
 
-    @Override
-    public int hashCode() {
+    public int getId() {
         return id;
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        return hashCode() == obj.hashCode();
-//    }
 }
