@@ -1,4 +1,4 @@
-package homework13.model;
+package homework13.model.employee;
 
 public class Fresher extends Employee {
     private String graduationDate;
