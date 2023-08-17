@@ -21,9 +21,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        boolean isProgramRunning = true;
-        while (isProgramRunning) {
+//        boolean isProgramRunning = true;
+//        while (isProgramRunning) {
+//
+//        }
 
+//        throw new RuntimeException("abc");
+        try {
+
+            throw new Exception("abc");
+        } catch (Exception exception) {
+            System.out.println(exception.toString());
         }
     }
 }
