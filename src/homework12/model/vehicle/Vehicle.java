@@ -1,13 +1,13 @@
-package homework12.model;
+package homework12.model.vehicle;
 
 public abstract class Vehicle {
     protected int id;
     protected String brand;
-    protected int createAt;
+    protected String createAt;
     protected Double price;
     protected String color;
 
-    public Vehicle(int id, String brand, int createAt, Double price, String color) {
+    public Vehicle(int id, String brand, String createAt, Double price, String color) {
         this.id = id;
         this.brand = brand;
         this.createAt = createAt;

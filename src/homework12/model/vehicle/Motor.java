@@ -1,9 +1,9 @@
-package homework12.model;
+package homework12.model.vehicle;
 
 public class Motor extends Vehicle {
     private Double performance;
 
-    public Motor(int id, String brand, int createAt, Double price, String color, Double performance) {
+    public Motor(int id, String brand, String createAt, Double price, String color, Double performance) {
         super(id, brand, createAt, price, color);
         this.performance = performance;
     }

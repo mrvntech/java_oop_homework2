@@ -1,6 +1,11 @@
 package homework12.controller;
 
-import homework12.model.Vehicle;
+import homework12.model.action.Action;
+import homework12.model.vehicle.Car;
+import homework12.model.vehicle.Motor;
+import homework12.model.vehicle.Truck;
+import homework12.model.vehicle.Vehicle;
+import homework12.view.VehicleManagementView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class VehicleController {
-    private final HashMap<Integer, Vehicle> vehicles = new HashMap<>();
-    private final HashMap<String, ArrayList<Vehicle>> brandVehicles = new HashMap<>();
-    private final HashMap<String, ArrayList<Vehicle>> colorVehicles = new HashMap<>();
+    private static final HashMap<Integer, Vehicle> vehicles = new HashMap<>();
 
     public void createVehicle(Vehicle _vehicle) {
         Optional<Vehicle> vehicle = Optional.ofNullable(vehicles.get(_vehicle.getId()));
@@ -19,34 +22,52 @@ public class VehicleController {
         } else {
             vehicles.put(_vehicle.getId(), _vehicle);
         }
-
-        Optional<ArrayList<Vehicle>> brandVehicles = Optional.ofNullable(this.brandVehicles.get(_vehicle.getBrand()));
-        if (brandVehicles.isPresent()) {
-            brandVehicles.get().add(_vehicle);
-        } else {
-            this.brandVehicles.put(_vehicle.getBrand(), new ArrayList<>(List.of(_vehicle)));
-        }
-
-        Optional<ArrayList<Vehicle>> colorVehicles = Optional.ofNullable(this.colorVehicles.get(_vehicle.getColor()));
-        if (colorVehicles.isPresent()) {
-            colorVehicles.get().add(_vehicle);
-        } else {
-            this.colorVehicles.put(_vehicle.getColor(), new ArrayList<>(List.of(_vehicle)));
-        }
     }
 
-    public void removeVehicle(int id) {
+    public static void removeVehicle(int id) {
         Vehicle vehicle = vehicles.get(id);
         vehicles.remove(id);
-        colorVehicles.remove(vehicle.getColor());
-        brandVehicles.remove(vehicle.getBrand());
     }
 
-    public Optional<ArrayList<Vehicle>> getVehicleByBrand(String brand) {
-        return Optional.ofNullable(brandVehicles.get(brand));
+    public static List<Vehicle> getVehicleByBrand(String brand) {
+        return vehicles.values().stream().filter(vehicle -> vehicle.getBrand().equals(brand)).toList();
     }
 
-    public Optional<ArrayList<Vehicle>> getVehicleByColor(String color) {
-        return Optional.ofNullable(colorVehicles.get(color));
+    public static List<Vehicle> getVehicleByColor(String color) {
+        return vehicles.values().stream().filter(vehicle -> vehicle.getColor().equals(color)).toList();
+    }
+
+    public static void run() {
+        Action action = VehicleManagementView.getAction();
+        boolean isProgramRunning = true;
+        while (isProgramRunning) {
+
+            switch (action) {
+                case ADD_CAR -> {
+                    Car car = VehicleManagementView.getCar();
+                    vehicles.put(car.getId(), car);
+                }
+                case ADD_MOTOR -> {
+                    Motor motor = VehicleManagementView.getMotor();
+                    vehicles.put(motor.getId(), motor);
+                }
+                case REMOVE_VEHICLE -> {
+                    removeVehicle(VehicleManagementView.getId());
+                }
+                case ADD_TRUCK -> {
+                    Truck truck = VehicleManagementView.getTruck();
+                    vehicles.put(truck.getId(), truck);
+                }
+                case FIND_VEHICLE_BY_BRAND -> {
+                    VehicleManagementView.printVehicle(getVehicleByBrand(VehicleManagementView.getBrand()));
+                }
+                case FIND_VEHICLE_BY_COLOR -> {
+                    VehicleManagementView.printVehicle(getVehicleByColor(VehicleManagementView.getColor()));
+                }
+                default -> {
+                    isProgramRunning = false;
+                }
+            }
+        }
     }
 }

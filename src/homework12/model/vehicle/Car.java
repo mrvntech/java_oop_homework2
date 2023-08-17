@@ -1,10 +1,10 @@
-package homework12.model;
+package homework12.model.vehicle;
 
 public class Car extends Vehicle {
     private int seats;
     private String engineType;
 
-    public Car(int id, String brand, int createAt, Double price, String color, int seats, String engineType) {
+    public Car(int id, String brand, String createAt, Double price, String color, int seats, String engineType) {
         super(id, brand, createAt, price, color);
         this.seats = seats;
         this.engineType = engineType;
