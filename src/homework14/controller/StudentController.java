@@ -3,13 +3,16 @@ package homework14.controller;
 import homework14.model.student.GoodStudent;
 import homework14.model.student.NormalStudent;
 import homework14.model.student.Student;
+import homework14.view.StudentView;
+import homework14.model.action.Action;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class StudentController {
-    private final Comparator<Student> comparator = new Comparator<Student>() {
+    private static final ArrayList<Student> students = new ArrayList<>();
+    private static final Comparator<Student> comparator = new Comparator<Student>() {
         @Override
         public int compare(Student o1, Student o2) {
             if (o1 instanceof GoodStudent && o2 instanceof GoodStudent) {
@@ -33,9 +36,15 @@ public class StudentController {
             return 0;
         }
     };
-    ArrayList<Student> students = new ArrayList<>();
 
-    public void addStudent(Student student) {
+    public static void addNormalStudent() {
+        Student student = StudentView.getNormalStudent();
+        students.add(student);
+        students.sort(comparator);
+    }
+
+    public static void addGoodStudent() {
+        Student student = StudentView.getGoodStudent();
         students.add(student);
         students.sort(comparator);
     }
@@ -51,5 +60,30 @@ public class StudentController {
         Collections.copy(listStudents, students);
         listStudents.sort(comparator1);
         return listStudents;
+    }
+
+    public static void run() {
+        boolean isProgramRunning = true;
+        while (isProgramRunning) {
+            Action action = StudentView.getAction();
+            switch (action) {
+                case EXIT -> {
+                    isProgramRunning = false;
+                }
+                case ADD_GOOD_STUDENT -> {
+                    addGoodStudent();
+                }
+                case ADD_NORMAL_STUDENT -> {
+                    addNormalStudent();
+                }
+                case GET_LIST_STUDENT -> {
+                    students.forEach(student -> System.out.println(student.toString()));
+                }
+//                case GET_LIST_HIDE_STUDENT -> {
+//
+//                }
+            }
+        }
+
     }
 }

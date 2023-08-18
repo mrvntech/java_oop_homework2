@@ -1,5 +1,9 @@
 package homework14.view;
 
+import homework14.model.action.Action;
+import homework14.model.student.GoodStudent;
+import homework14.model.student.NormalStudent;
+import homework14.model.student.Student;
 import homework14.util.validator.StudentInputValidator;
 
 import java.util.Optional;
@@ -103,5 +107,46 @@ public class StudentView {
             }
             scanner.nextLine();
         }
+    }
+
+    public static String getBestRewardName() {
+        while (true) {
+            System.out.print("Enter entry test score: ");
+            return scanner.nextLine();
+        }
+    }
+
+    public static Action getAction() {
+        System.out.print("Enter action: ");
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        Optional<Action> action = Action.getAction(input);
+        return action.orElse(Action.EXIT);
+    }
+
+    public static Student getNormalStudent() {
+        String fullName = getFullName();
+        String dateOfBirth = getDateOfBirth();
+        boolean sex = getSex();
+        String phoneNumber = getPhoneNumber();
+        String universityName = getUniversityName();
+        int gradeLevel = getGradeLevel();
+        double englishTestScore = getEnglishScore();
+        double entryTestScore = getEntryTestScore();
+
+        return new NormalStudent(fullName, dateOfBirth, sex, phoneNumber, universityName, gradeLevel, englishTestScore, entryTestScore);
+    }
+
+    public static Student getGoodStudent() {
+        String fullName = getFullName();
+        String dateOfBirth = getDateOfBirth();
+        boolean sex = getSex();
+        String phoneNumber = getPhoneNumber();
+        String universityName = getUniversityName();
+        int gradeLevel = getGradeLevel();
+        double gpa = getGpa();
+        String bestRewardName = getBestRewardName();
+
+        return new GoodStudent(fullName, dateOfBirth, sex, phoneNumber, universityName, gradeLevel, gpa, bestRewardName);
     }
 }
