@@ -3,10 +3,6 @@ package homework14.util.validator;
 import homework14.util.Regex;
 
 public class StudentInputValidator {
-    public static boolean validateEmail(String email) {
-        return Regex.EMAIL_REGEX.getPattern().matcher(email).find();
-    }
-
     public static boolean validatePhoneNumber(String phoneNumber) {
         return Regex.PHONE_NUMBER_REGEX.getPattern().matcher(phoneNumber).find();
     }
