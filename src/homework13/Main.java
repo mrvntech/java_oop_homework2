@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        EmployeeController.run();
+        try {
+            EmployeeController.run();
+        } catch (Exception exception) {
+            System.out.println(exception.toString());
+        }
     }
 }

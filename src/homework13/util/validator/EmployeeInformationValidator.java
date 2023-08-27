@@ -1,9 +1,6 @@
-package homework13.validator;
+package homework13.util.validator;
 
 import homework13.util.Regex;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EmployeeInformationValidator {
     public static boolean validateEmail(String email) {
@@ -14,8 +11,8 @@ public class EmployeeInformationValidator {
         return Regex.PHONE_NUMBER_REGEX.getPattern().matcher(phoneNumber).find();
     }
 
-    public static boolean validateDateOfBirth(String dateOfBirth) {
-        return Regex.DATE_OF_BIRTH_REGEX.getPattern().matcher(dateOfBirth).find();
+    public static boolean validateDate(String dateOfBirth) {
+        return Regex.DATE_REGEX.getPattern().matcher(dateOfBirth).find();
     }
 
     public static boolean validateFullName(String fullName) {

@@ -1,4 +1,4 @@
-package homework13.exception;
+package homework13.util.exception;
 
 public class PhoneNumberException extends RuntimeException {
     public PhoneNumberException() {

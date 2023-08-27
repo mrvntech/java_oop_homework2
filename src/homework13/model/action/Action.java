@@ -7,7 +7,9 @@ public enum Action {
     GET_ALL_INTERN(2),
     GET_ALL_EXPERIENCE(3),
     GET_ALL_FRESHER(4),
-    EXIT(5);
+    UPDATE_EMPLOYEE(5),
+    REMOVE_EMPLOYEE(6),
+    EXIT(7);
     private final int value;
 
     Action(int value) {

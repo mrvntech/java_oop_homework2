@@ -1,30 +1,18 @@
 package homework13.view;
 
+import homework13.controller.EmployeeController;
 import homework13.model.action.Action;
 import homework13.model.employee.*;
-import homework13.validator.EmployeeInformationValidator;
+import homework13.util.dto.*;
+import homework13.util.validator.EmployeeInformationValidator;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class EmployeeManagementView {
     private static final Scanner scanner = new Scanner(System.in);
-
-    public static int getId() {
-        int id;
-        while (true) {
-            System.out.print("Enter id: ");
-            if (scanner.hasNextInt()) {
-                id = scanner.nextInt();
-                scanner.nextLine();
-                break;
-            }
-            scanner.nextLine();
-        }
-        return id;
-    }
 
     public static String getFullName() {
         while (true) {
@@ -40,7 +28,7 @@ public class EmployeeManagementView {
         while (true) {
             System.out.print("Enter date of birth: ");
             String dateOfBirth = scanner.nextLine();
-            if (EmployeeInformationValidator.validateDateOfBirth(dateOfBirth)) {
+            if (EmployeeInformationValidator.validateDate(dateOfBirth)) {
                 return dateOfBirth;
             }
         }
@@ -85,11 +73,9 @@ public class EmployeeManagementView {
         return scanner.nextLine();
     }
 
-    public static int getSemester() {
+    public static String getSemester() {
         System.out.print("Enter semester: ");
-        int semester = scanner.nextInt();
-        scanner.nextLine();
-        return semester;
+        return scanner.nextLine();
     }
 
     public static String getUniversityName() {
@@ -98,15 +84,25 @@ public class EmployeeManagementView {
     }
 
     public static int getGraduationRank() {
-        System.out.print("Enter graduation rank: ");
-        int graduationRank = scanner.nextInt();
-        scanner.nextLine();
-        return graduationRank;
+        while (true) {
+            System.out.print("Enter graduation rank: ");
+            if (scanner.hasNextInt()) {
+                int graduationRank = scanner.nextInt();
+                scanner.nextLine();
+                return graduationRank;
+            }
+            scanner.nextLine();
+        }
     }
 
     public static String getGraduationDate() {
-        System.out.print("Enter graduation date: ");
-        return scanner.nextLine();
+        while (true) {
+            System.out.print("Enter graduation date: ");
+            String graduationDate = scanner.nextLine();
+            if (EmployeeInformationValidator.validateDate(graduationDate)) {
+                return graduationDate;
+            }
+        }
     }
 
     public static String getEducation() {
@@ -122,11 +118,53 @@ public class EmployeeManagementView {
     }
 
     public static String getProSkill() {
-        System.out.print("Enter pro skill");
+        System.out.print("Enter pro skill: ");
         return scanner.nextLine();
     }
 
-    public static Optional<Employee> getEmployee() {
+    public static int getId() {
+        while (true) {
+            System.out.print("Enter id: ");
+            if (scanner.hasNextInt()) {
+                int id = scanner.nextInt();
+                scanner.nextLine();
+                return id;
+            }
+            scanner.nextLine();
+        }
+    }
+
+    public static Optional<CreateEmployeeDto> getEmployee() {
+        String fullName = getFullName();
+        String dateOfBirth = getDateOfBirth();
+        String phoneNumber = getPhoneNumber();
+        String email = getEmail();
+        Optional<EmployeeType> employeeType = getEmployeeType();
+        if (employeeType.isPresent()) {
+            switch (employeeType.get()) {
+                case INTERN -> {
+                    String major = getMajor();
+                    String universityName = getUniversityName();
+                    String semester = getSemester();
+                    return Optional.of(new CreateInternDto(fullName, dateOfBirth, phoneNumber, email, major, semester, universityName));
+                }
+                case FRESHER -> {
+                    String graduationDate = getGraduationDate();
+                    int graduationRank = getGraduationRank();
+                    String education = getEducation();
+                    return Optional.of(new CreateFresherDto(fullName, dateOfBirth, phoneNumber, email, graduationDate, graduationRank, education));
+                }
+                case EXPERIENCE -> {
+                    int experienceYear = getExpInYear();
+                    String proSkill = getProSkill();
+                    return Optional.of(new CreateExperienceDto(fullName, dateOfBirth, phoneNumber, email, experienceYear, proSkill));
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<CreateEmployeeDto> getUpdateEmployee() {
         int id = getId();
         String fullName = getFullName();
         String dateOfBirth = getDateOfBirth();
@@ -138,19 +176,19 @@ public class EmployeeManagementView {
                 case INTERN -> {
                     String major = getMajor();
                     String universityName = getUniversityName();
-                    int semester = getSemester();
-                    return Optional.of(new Intern(id, fullName, dateOfBirth, phoneNumber, email, major, semester, universityName));
+                    String semester = getSemester();
+                    return Optional.of(new UpdateInternDto(fullName, dateOfBirth, phoneNumber, email, major, semester, universityName, id));
                 }
                 case FRESHER -> {
                     String graduationDate = getGraduationDate();
                     int graduationRank = getGraduationRank();
                     String education = getEducation();
-                    return Optional.of(new Fresher(id, fullName, dateOfBirth, phoneNumber, email, graduationDate, graduationRank, education));
+                    return Optional.of(new UpdateFresherDto(fullName, dateOfBirth, phoneNumber, email, graduationDate, graduationRank, education, id));
                 }
                 case EXPERIENCE -> {
                     int experienceYear = getExpInYear();
                     String proSkill = getProSkill();
-                    return Optional.of(new Experience(id, fullName, dateOfBirth, phoneNumber, email, experienceYear, proSkill));
+                    return Optional.of(new UpdateExperienceDto(fullName, dateOfBirth, phoneNumber, email, experienceYear, proSkill, id));
                 }
             }
         }
@@ -170,6 +208,34 @@ public class EmployeeManagementView {
     }
 
     public static void main(String[] args) {
-        System.out.println(getFullName());
+        boolean isProgramRunning = true;
+        while (isProgramRunning) {
+            Action action = EmployeeManagementView.getAction();
+            switch (action) {
+                case ADD_EMPLOYEE -> {
+                    Optional<CreateEmployeeDto> createEmployeeDto = getEmployee();
+                    createEmployeeDto.ifPresent(employeeDto -> {
+                        System.out.println(employeeDto.toString());
+                        try {
+                            EmployeeController.addEmployee();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
+//                case GET_ALL_INTERN -> {
+//                    EmployeeManagementView.printEmployees(getAllIntern());
+//                }
+//                case GET_ALL_FRESHER -> {
+//                    EmployeeManagementView.printEmployees(getAllFresher());
+//                }
+//                case GET_ALL_EXPERIENCE -> {
+//                    EmployeeManagementView.printEmployees(getAllExperience());
+//                }
+//                default -> {
+//                    isProgramRunning = false;
+//                }
+            }
+        }
     }
 }

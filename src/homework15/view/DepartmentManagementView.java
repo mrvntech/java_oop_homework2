@@ -80,7 +80,6 @@ public class DepartmentManagementView {
         }
     }
 
-
     public static Student createStudent() {
         int id = getId();
         String fullName = getFullName();
