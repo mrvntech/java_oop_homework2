@@ -44,4 +44,24 @@ public abstract class Student {
                 ", gradeLevel=" + gradeLevel +
                 '}';
     }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public int getGradeLevel() {
+        return gradeLevel;
+    }
 }

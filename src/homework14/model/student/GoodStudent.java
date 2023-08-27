@@ -10,6 +10,10 @@ public class GoodStudent extends Student {
         this.bestRewardName = bestRewardName;
     }
 
+    public String getBestRewardName() {
+        return bestRewardName;
+    }
+
     public Double getGpa() {
         return gpa;
     }

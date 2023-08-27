@@ -8,7 +8,7 @@ public class StudentInputValidator {
     }
 
     public static boolean validateDateOfBirth(String dateOfBirth) {
-        return Regex.DATE_OF_BIRTH_REGEX.getPattern().matcher(dateOfBirth).find();
+        return Regex.DATE_REGEX.getPattern().matcher(dateOfBirth).find();
     }
 
     public static boolean validateFullName(String fullName) {

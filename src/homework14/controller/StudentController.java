@@ -3,15 +3,16 @@ package homework14.controller;
 import homework14.model.student.GoodStudent;
 import homework14.model.student.NormalStudent;
 import homework14.model.student.Student;
+import homework14.repository.StudentRepository;
 import homework14.view.StudentView;
 import homework14.model.action.Action;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class StudentController {
-    private static final ArrayList<Student> students = new ArrayList<>();
     private static final Comparator<Student> comparator = new Comparator<Student>() {
         @Override
         public int compare(Student o1, Student o2) {
@@ -37,32 +38,28 @@ public class StudentController {
         }
     };
 
-    public static void addNormalStudent() {
+    public static void addNormalStudent() throws SQLException {
         Student student = StudentView.getNormalStudent();
-        students.add(student);
-        students.sort(comparator);
+        StudentRepository.insertNormalStudent((NormalStudent) student);
+//        students.sort(comparator);
     }
 
-    public static void addGoodStudent() {
+    public static void addGoodStudent() throws SQLException {
         Student student = StudentView.getGoodStudent();
-        students.add(student);
-        students.sort(comparator);
+        StudentRepository.insertGoodStudent((GoodStudent) student);
+//        students.sort(comparator);
     }
 
-    public ArrayList<Student> getStudents() {
-        Comparator<Student> comparator1 = new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getFullName().hashCode() - o2.getFullName().hashCode();
-            }
-        };
-        ArrayList<Student> listStudents = new ArrayList<>();
-        Collections.copy(listStudents, students);
-        listStudents.sort(comparator1);
-        return listStudents;
+    public static ArrayList<Student> getStudents() throws SQLException {
+        return (ArrayList<Student>) StudentRepository.getAllStudent();
     }
 
-    public static void run() {
+    public static ArrayList<Student> getHideStudents(int n) throws SQLException {
+        ArrayList<Student> students = getStudents();
+        return (ArrayList<Student>) students.subList(0, n);
+    }
+
+    public static void run() throws SQLException {
         boolean isProgramRunning = true;
         while (isProgramRunning) {
             Action action = StudentView.getAction();
@@ -77,11 +74,12 @@ public class StudentController {
                     addNormalStudent();
                 }
                 case GET_LIST_STUDENT -> {
-                    students.forEach(student -> System.out.println(student.toString()));
+                    getStudents().forEach(student -> System.out.println(student.toString()));
                 }
-//                case GET_LIST_HIDE_STUDENT -> {
-//
-//                }
+                case GET_LIST_HIDE_STUDENT -> {
+                    int hideNumber = StudentView.getHideNumber();
+                    getHideStudents(hideNumber).forEach(student -> System.out.println(student.toString()));
+                }
             }
         }
 

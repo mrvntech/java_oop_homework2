@@ -59,6 +59,7 @@ public class StudentView {
 
     public static int getGradeLevel() {
         while (true) {
+            System.out.print("Enter grade level: ");
             if (scanner.hasNextInt()) {
                 int gradeLevel = scanner.nextInt();
                 scanner.nextLine();
@@ -71,7 +72,7 @@ public class StudentView {
     public static Double getGpa() {
         while (true) {
             System.out.print("Enter gpa: ");
-            if (scanner.hasNextInt()) {
+            if (scanner.hasNextDouble()) {
                 Double gradeLevel = scanner.nextDouble();
                 scanner.nextLine();
                 return gradeLevel;
@@ -116,6 +117,12 @@ public class StudentView {
         }
     }
 
+    public static int getHideNumber() {
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        return number;
+    }
+
     public static Action getAction() {
         System.out.print("Enter action: ");
         int input = scanner.nextInt();
@@ -133,7 +140,6 @@ public class StudentView {
         int gradeLevel = getGradeLevel();
         double englishTestScore = getEnglishScore();
         double entryTestScore = getEntryTestScore();
-
         return new NormalStudent(fullName, dateOfBirth, sex, phoneNumber, universityName, gradeLevel, englishTestScore, entryTestScore);
     }
 
@@ -146,7 +152,6 @@ public class StudentView {
         int gradeLevel = getGradeLevel();
         double gpa = getGpa();
         String bestRewardName = getBestRewardName();
-
         return new GoodStudent(fullName, dateOfBirth, sex, phoneNumber, universityName, gradeLevel, gpa, bestRewardName);
     }
 }
